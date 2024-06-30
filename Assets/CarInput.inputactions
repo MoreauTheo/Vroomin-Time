@@ -1,0 +1,56 @@
+{
+    "name": "CarInput",
+    "maps": [
+        {
+            "name": "Car",
+            "id": "8ebb5754-0417-4f56-a5d7-0ee1ec78af87",
+            "actions": [
+                {
+                    "name": "Turn",
+                    "type": "Value",
+                    "id": "e78ec867-74b7-4815-a57f-ad8637ca553a",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "c9105e61-cf47-42ab-bc1b-683ec4b8fc71",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "44ede7be-6c95-44e1-9ccb-d691368d57ff",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "a12bf023-c86e-42e2-bb20-0693a81d0d97",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
