@@ -577,7 +577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 2059967521}
-  speed: 13
+  speed: 15
   turnSpeed: 200
   driftCatchSpeed: 2.25
   maxDriftAngle: 65

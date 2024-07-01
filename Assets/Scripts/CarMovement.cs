@@ -20,6 +20,8 @@ public class CarMovement : MonoBehaviour
     private Vector3 bounceDirection;
     public float bounceFallback;
     public float bounceForce;
+    public float stepStopBouce;
+    private Vector3 savedBounceDirection;
 
 
     private void Awake()
@@ -122,13 +124,19 @@ public class CarMovement : MonoBehaviour
 
     void CalculBounceBack()
     {
-        bounceDirection = -moveDirection;
+        savedBounceDirection = -moveDirection * bounceForce;
+        bounceDirection = savedBounceDirection;
     }
 
     void MoveBounceBack()
     {
-        transform.position += bounceDirection *bounceForce* Time.deltaTime;
-        bounceDirection -= bounceDirection/bounceFallback *Time.deltaTime;
+        transform.position += bounceDirection * Time.deltaTime;
+        bounceDirection -= savedBounceDirection/bounceFallback *Time.deltaTime;
+
+        if(bounceDirection.magnitude<= stepStopBouce)
+        {
+            bounceDirection = Vector3.zero;
+        }
         
 
 
