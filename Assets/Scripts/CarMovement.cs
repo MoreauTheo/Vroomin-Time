@@ -4,25 +4,26 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CarMovement : MonoBehaviour
-{
-    public GameObject collider;
-    public float speed;
-    public float turnSpeed;
+{/*
+    private GameObject hitbox;
+    public float speed = 15;
+    public float accelSpeed = 15;
+    private float targetSpeed;
+    public float turnSpeed = 200;
     public CarInput carInput;
     private Vector3 moveDirection;
-    public float driftCatchSpeed;
-    public float maxDriftAngle;
+    public float driftCatchSpeed = 2.25f;
+    public float maxDriftAngle = 65;
     private bool left;
     private bool right;
     private bool down;
     private float LRF;
     private enum Coordone{X,Y };
-    private Vector3 bounceDirection;
-    public float bounceFallback;
-    public float bounceForce;
-    public float stepStopBouce;
-    private Vector3 savedBounceDirection;
+    public float bounceFallback = 3;
 
+    [Header("DEBUG")]
+    public bool isWalled;
+    public bool wasWalled;
 
     private void Awake()
     {
@@ -35,6 +36,9 @@ public class CarMovement : MonoBehaviour
     void Start()
     {
         moveDirection = transform.forward;
+        hitbox = GameObject.Find("Hitbox");
+        targetSpeed = speed;
+        
     }
 
     // Update is called once per frame
@@ -43,24 +47,40 @@ public class CarMovement : MonoBehaviour
         LRF = carInput.Car.Turn.ReadValue<float>();
         if (left && down)
         { LRF = -1; }
-
         if (right && down)
         { LRF = 1; }
+        //tout le bloc ci dessus sert à check les inputs tactiles pour le téléphone
+
+
+        ActualiseSpeed();//permet de d'augmenter graduellement la vitesse 
+
+
+        isWalled = false;
         CheckMovement(Coordone.X);
         CheckMovement(Coordone.Y);
+        //permet de slide sur les murs sans passer à traver
+
+        if (isWalled && !wasWalled)
+        {
+            Bump();
+        }
+        //si le joueur viens de rentrer dans un mur, il est bump
 
 
         Turning(LRF);
+        //faire tourner le joueur
+
         moveDirection = Vector3.RotateTowards(moveDirection, transform.forward, driftCatchSpeed*Time.deltaTime, 0.0f);
         if (Vector3.Angle(transform.forward, moveDirection) >= maxDriftAngle)
         {
             moveDirection = Quaternion.AngleAxis(maxDriftAngle * -LRF, Vector3.up) * transform.forward;
             Debug.Log("OULA, CA DRIFT LA NAN ?");
         }
-
+        //permet au drift de ne pas avoir trop d'écart avec l'orientation de la voiture
 
         
-
+        wasWalled = isWalled;
+        
 
     }
 
@@ -92,57 +112,54 @@ public class CarMovement : MonoBehaviour
             singleAxisVectorPreview = new Vector3(0, 0, moveDirection.z);
         }
 
-        singleAxisVectorPreview *= speed*Time.deltaTime;
+        singleAxisVectorPreview *= speedActu*Time.deltaTime;
 
-        Collider[] touchingMovement = Physics.OverlapBox( collider.transform.position+singleAxisVectorPreview, collider.transform.lossyScale/2, collider.transform.rotation);
-        bool isWall = false;
+        Collider[] touchingMovement = Physics.OverlapBox(hitbox.transform.position+singleAxisVectorPreview, hitbox.transform.lossyScale/2, hitbox.transform.rotation);
+        bool isWalledTemporary = false;
         foreach(Collider obstacle in touchingMovement)
         {
             if(obstacle.gameObject.tag == "wall")
             {
-                isWall = true;
+                isWalledTemporary = true;
+                isWalled = true;
+
             }
         }
-        if(!isWall)
+
+       
+
+        if(!isWalledTemporary)
         {
             transform.position += singleAxisVectorPreview;
+
         }
-        else
-        {
-            CalculBounceBack();
-        }
-        MoveBounceBack();
+
+        //MoveBounceBack();
     }
 
     void Turning(float LR)
     {
             transform.Rotate(new Vector3(0, LR * turnSpeed * Time.deltaTime, 0));
-            //moveDirection = Quaternion.AngleAxis(LR * turnSpeed * Time.deltaTime, Vector3.up) * moveDirection;
+          
 
 
     }
 
-    void CalculBounceBack()
+    void ActualiseSpeed()
     {
-        savedBounceDirection = -moveDirection * bounceForce;
-        bounceDirection = savedBounceDirection;
-    }
-
-    void MoveBounceBack()
-    {
-        transform.position += bounceDirection * Time.deltaTime;
-        bounceDirection -= savedBounceDirection/bounceFallback *Time.deltaTime;
-
-        if(bounceDirection.magnitude<= stepStopBouce)
+        if((speedActu < targetSpeed) )
         {
-            bounceDirection = Vector3.zero;
+            speedActu += accelSpeed * Time.deltaTime;
         }
-        
-
-
-
-
-
+        else
+        {
+            speedActu = targetSpeed;
+        }
     }
+  
+    void Bump()
+    {
+        Debug.Log("Bump");
 
+    }*/
 }

@@ -340,7 +340,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126615311}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 78428acda47ee304a93a03a5dc8219a0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -430,7 +430,6 @@ GameObject:
   - component: {fileID: 477770622}
   - component: {fileID: 477770625}
   - component: {fileID: 477770624}
-  - component: {fileID: 477770623}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -453,27 +452,6 @@ Transform:
   m_Father: {fileID: 574342766}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!65 &477770623
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477770621}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &477770624
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -534,6 +512,9 @@ GameObject:
   m_Component:
   - component: {fileID: 574342766}
   - component: {fileID: 574342767}
+  - component: {fileID: 574342769}
+  - component: {fileID: 574342768}
+  - component: {fileID: 574342770}
   m_Layer: 0
   m_Name: Voiture
   m_TagString: Untagged
@@ -571,19 +552,87 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574342765}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b184c8ccbcebdb4eaf8b2f75be80582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 2059967521}
-  speed: 15
+  speed: 20
+  accelSpeed: 15
   turnSpeed: 200
   driftCatchSpeed: 2.25
   maxDriftAngle: 65
-  bounceFallback: 3
-  bounceForce: 10
-  stepStopBouce: 1.5
+  bounceFallback: 15
+  isWalled: 0
+  wasWalled: 0
+  speedActu: 0
+--- !u!65 &574342768
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574342765}
+  m_Material: {fileID: 13400000, guid: 78428acda47ee304a93a03a5dc8219a0, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.52888477, y: 0.78896266, z: 1.4813309}
+  m_Center: {x: -0.2509994, y: -0.0051472485, z: 0.0038290918}
+--- !u!54 &574342769
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574342765}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
+--- !u!114 &574342770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574342765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2100162ec008bf47beab004854abc8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 15
+  accelSpeed: 15
+  turnSpeed: 200
+  driftCatchSpeed: 2.25
+  maxDriftAngle: 65
+  ChocVFX: {fileID: 6049994839898122673, guid: 1ccf157ebc52be141b66f8c8c1140905, type: 3}
+  speedActu: 0
 --- !u!1 &587257525
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +644,6 @@ GameObject:
   - component: {fileID: 587257526}
   - component: {fileID: 587257529}
   - component: {fileID: 587257528}
-  - component: {fileID: 587257527}
   m_Layer: 0
   m_Name: Cylinder (1)
   m_TagString: Untagged
@@ -618,29 +666,6 @@ Transform:
   m_Father: {fileID: 574342766}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -90}
---- !u!136 &587257527
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 587257525}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &587257528
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -717,7 +742,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 673251698}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 78428acda47ee304a93a03a5dc8219a0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -901,7 +926,6 @@ GameObject:
   - component: {fileID: 954608249}
   - component: {fileID: 954608252}
   - component: {fileID: 954608251}
-  - component: {fileID: 954608250}
   m_Layer: 0
   m_Name: Cylinder (3)
   m_TagString: Untagged
@@ -924,29 +948,6 @@ Transform:
   m_Father: {fileID: 574342766}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -90}
---- !u!136 &954608250
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954608248}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &954608251
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1204,7 +1205,6 @@ GameObject:
   - component: {fileID: 1118898496}
   - component: {fileID: 1118898499}
   - component: {fileID: 1118898498}
-  - component: {fileID: 1118898497}
   - component: {fileID: 1118898500}
   m_Layer: 0
   m_Name: Cylinder (2)
@@ -1228,29 +1228,6 @@ Transform:
   m_Father: {fileID: 574342766}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -90}
---- !u!136 &1118898497
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118898495}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1118898498
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1434,7 +1411,6 @@ GameObject:
   - component: {fileID: 1447571579}
   - component: {fileID: 1447571582}
   - component: {fileID: 1447571581}
-  - component: {fileID: 1447571580}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1457,27 +1433,6 @@ Transform:
   m_Father: {fileID: 574342766}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!65 &1447571580
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1447571578}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1447571581
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1554,7 +1509,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468456755}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 78428acda47ee304a93a03a5dc8219a0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1659,7 +1614,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551978821}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 78428acda47ee304a93a03a5dc8219a0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1749,7 +1704,6 @@ GameObject:
   - component: {fileID: 1609851927}
   - component: {fileID: 1609851930}
   - component: {fileID: 1609851929}
-  - component: {fileID: 1609851928}
   - component: {fileID: 1609851931}
   m_Layer: 0
   m_Name: Cylinder
@@ -1773,29 +1727,6 @@ Transform:
   m_Father: {fileID: 574342766}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -90}
---- !u!136 &1609851928
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1609851926}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1609851929
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2331,12 +2262,12 @@ GameObject:
   - component: {fileID: 2059967524}
   - component: {fileID: 2059967523}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &2059967523
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2344,7 +2275,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059967521}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
