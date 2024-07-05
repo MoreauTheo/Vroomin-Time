@@ -14,10 +14,12 @@ public class CarMovementPhysics : MonoBehaviour
     private float targetSpeed;
     public GameObject ChocVFX;
 
-
+    public float bufferTiming;
+    public float speedLost;
     public CarInput carInput;
 
     private Vector3 moveDirection;
+    private float buffer;
     private float LRF;
     private Rigidbody rb;
     public float speedActu = 0;
@@ -54,7 +56,7 @@ public class CarMovementPhysics : MonoBehaviour
 
         ActualiseSpeed();
 
-
+        buffer -= Time.deltaTime;
 
     }
     void Turning(float LR)
@@ -79,9 +81,15 @@ public class CarMovementPhysics : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //speedActu /= 1.5f;
-        rb.AddForce(collision.contacts[0].normal * 10);
-        GameObject choc = Instantiate(ChocVFX, collision.contacts[0].point,Quaternion.identity);
-        choc.transform.LookAt(choc.transform.position + collision.contacts[1].normal );
+
+        if(buffer <= 0)
+        {
+            speedActu -= speedActu / 100 * speedLost;
+            rb.AddForce(collision.contacts[0].normal * 10);
+            GameObject choc = Instantiate(ChocVFX, collision.contacts[0].point, Quaternion.identity);
+            choc.transform.LookAt(choc.transform.position + collision.contacts[1].normal);
+        }
+        buffer = bufferTiming;
+
     }
 }
