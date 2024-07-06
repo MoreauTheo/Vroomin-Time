@@ -136,6 +136,51 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""BeforeRace"",
+            ""id"": ""9a1f0fbc-b477-451b-b53b-afb374ab03a5"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""bc0a37f7-1344-4a41-9bc5-2b0c4e272cdd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5253b6c7-2848-4fd9-88e5-11ab1f519064"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3806f617-8f68-4d2a-a096-4b3e7afb5721"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Vide"",
+            ""id"": ""8c6ecb63-af95-4416-84e4-4be54336738e"",
+            ""actions"": [],
+            ""bindings"": []
         }
     ],
     ""controlSchemes"": []
@@ -144,6 +189,11 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
         m_Car = asset.FindActionMap("Car", throwIfNotFound: true);
         m_Car_Turn = m_Car.FindAction("Turn", throwIfNotFound: true);
         m_Car_Accelerating = m_Car.FindAction("Accelerating", throwIfNotFound: true);
+        // BeforeRace
+        m_BeforeRace = asset.FindActionMap("BeforeRace", throwIfNotFound: true);
+        m_BeforeRace_Newaction = m_BeforeRace.FindAction("New action", throwIfNotFound: true);
+        // Vide
+        m_Vide = asset.FindActionMap("Vide", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -255,9 +305,100 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
         }
     }
     public CarActions @Car => new CarActions(this);
+
+    // BeforeRace
+    private readonly InputActionMap m_BeforeRace;
+    private List<IBeforeRaceActions> m_BeforeRaceActionsCallbackInterfaces = new List<IBeforeRaceActions>();
+    private readonly InputAction m_BeforeRace_Newaction;
+    public struct BeforeRaceActions
+    {
+        private @CarInput m_Wrapper;
+        public BeforeRaceActions(@CarInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_BeforeRace_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_BeforeRace; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BeforeRaceActions set) { return set.Get(); }
+        public void AddCallbacks(IBeforeRaceActions instance)
+        {
+            if (instance == null || m_Wrapper.m_BeforeRaceActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_BeforeRaceActionsCallbackInterfaces.Add(instance);
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
+        }
+
+        private void UnregisterCallbacks(IBeforeRaceActions instance)
+        {
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
+        }
+
+        public void RemoveCallbacks(IBeforeRaceActions instance)
+        {
+            if (m_Wrapper.m_BeforeRaceActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IBeforeRaceActions instance)
+        {
+            foreach (var item in m_Wrapper.m_BeforeRaceActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_BeforeRaceActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public BeforeRaceActions @BeforeRace => new BeforeRaceActions(this);
+
+    // Vide
+    private readonly InputActionMap m_Vide;
+    private List<IVideActions> m_VideActionsCallbackInterfaces = new List<IVideActions>();
+    public struct VideActions
+    {
+        private @CarInput m_Wrapper;
+        public VideActions(@CarInput wrapper) { m_Wrapper = wrapper; }
+        public InputActionMap Get() { return m_Wrapper.m_Vide; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(VideActions set) { return set.Get(); }
+        public void AddCallbacks(IVideActions instance)
+        {
+            if (instance == null || m_Wrapper.m_VideActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_VideActionsCallbackInterfaces.Add(instance);
+        }
+
+        private void UnregisterCallbacks(IVideActions instance)
+        {
+        }
+
+        public void RemoveCallbacks(IVideActions instance)
+        {
+            if (m_Wrapper.m_VideActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IVideActions instance)
+        {
+            foreach (var item in m_Wrapper.m_VideActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_VideActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public VideActions @Vide => new VideActions(this);
     public interface ICarActions
     {
         void OnTurn(InputAction.CallbackContext context);
         void OnAccelerating(InputAction.CallbackContext context);
+    }
+    public interface IBeforeRaceActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
+    }
+    public interface IVideActions
+    {
     }
 }

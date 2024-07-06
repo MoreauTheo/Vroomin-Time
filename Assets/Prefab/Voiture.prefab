@@ -755,6 +755,7 @@ MonoBehaviour:
   ChocVFX: {fileID: 6049994839898122673, guid: 1ccf157ebc52be141b66f8c8c1140905, type: 3}
   bufferTiming: 0.5
   speedLost: 65
+  multiplayerManager: {fileID: 0}
   speedActu: 0
 --- !u!114 &-2923950036466502857
 MonoBehaviour:
@@ -813,9 +814,25 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d2a06e32-7475-40a2-977b-f22343017899
     m_ActionName: Car/Accelerating[/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8351692593727493842}
+        m_TargetAssemblyTypeName: CarMovementPhysics, Assembly-CSharp
+        m_MethodName: StartRace
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bc0a37f7-1344-4a41-9bc5-2b0c4e272cdd
+    m_ActionName: BeforeRace/New action[/Keyboard/enter]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Car
+  m_DefaultActionMap: BeforeRace
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &7803300709291911737

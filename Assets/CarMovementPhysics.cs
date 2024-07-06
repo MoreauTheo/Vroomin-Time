@@ -19,24 +19,30 @@ public class CarMovementPhysics : MonoBehaviour
     public float bufferTiming;
     public float speedLost;
     public CarInput carInput;
+    public MultiplayerManager multiplayerManager;
 
     private Vector3 moveDirection;
     private float buffer;
     private float LRF;
     private float isAccelerating;
     private Rigidbody rb;
-    public float speedActu = 0;
 
+    public float speedActu = 0;
     private void Awake()
     {
         carInput = new CarInput();
+        multiplayerManager = GameObject.Find("MultiplayerManager").GetComponent<MultiplayerManager>();
+        multiplayerManager.players.Add(gameObject);
     }
     private void OnEnable()
     {
         carInput.Enable();
     }
+
+    
     void Start()
     {
+
         moveDirection = transform.forward;
         rb = GetComponent<Rigidbody>();
         targetSpeed = speed;
@@ -105,5 +111,15 @@ public class CarMovementPhysics : MonoBehaviour
         }
         buffer = bufferTiming;
 
+    }
+
+    public void StartRace(InputAction.CallbackContext ctx)
+    {
+        multiplayerManager.StartRaceM();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        multiplayerManager.Victory(this.gameObject);
     }
 }

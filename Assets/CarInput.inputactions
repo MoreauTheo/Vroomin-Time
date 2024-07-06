@@ -114,6 +114,51 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "BeforeRace",
+            "id": "9a1f0fbc-b477-451b-b53b-afb374ab03a5",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "bc0a37f7-1344-4a41-9bc5-2b0c4e272cdd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5253b6c7-2848-4fd9-88e5-11ab1f519064",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3806f617-8f68-4d2a-a096-4b3e7afb5721",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Vide",
+            "id": "8c6ecb63-af95-4416-84e4-4be54336738e",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": []
