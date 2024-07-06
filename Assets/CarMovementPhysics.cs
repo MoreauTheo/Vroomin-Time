@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CarMovementPhysics : MonoBehaviour
 {
     public float speed = 15;
     public float accelSpeed = 15;
+    public float deccelSpeed = 15;
     public float turnSpeed;
 
     public float driftCatchSpeed = 2.25f;
@@ -21,6 +23,7 @@ public class CarMovementPhysics : MonoBehaviour
     private Vector3 moveDirection;
     private float buffer;
     private float LRF;
+    private float isAccelerating;
     private Rigidbody rb;
     public float speedActu = 0;
 
@@ -40,10 +43,8 @@ public class CarMovementPhysics : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        LRF = carInput.Car.Turn.ReadValue<float>();
-    
+    void Update()    {
+        
         rb.velocity = moveDirection * speedActu;
         Turning(LRF);
 
@@ -59,23 +60,36 @@ public class CarMovementPhysics : MonoBehaviour
         buffer -= Time.deltaTime;
 
     }
-    void Turning(float LR)
+    public void Turning(float LR)
     {
+        Debug.Log("oui");
         transform.Rotate(new Vector3(0, LR * turnSpeed * Time.deltaTime, 0));
-
-
-
     }
 
+   public void SetLRF(InputAction.CallbackContext ctx)
+    {
+        LRF = ctx.ReadValue<float>();
+    }
+
+    public void SetBoolAccel(InputAction.CallbackContext ctx)
+    {
+        isAccelerating = ctx.ReadValue<float>();
+    }
     void ActualiseSpeed()
     {
-        if ((speedActu < targetSpeed))
+        if (isAccelerating >= 1)
         {
-            speedActu += accelSpeed * Time.deltaTime;
+            if (speedActu < targetSpeed)
+                speedActu += accelSpeed * Time.deltaTime;
+            else
+                speedActu = speed;
         }
         else
         {
-            speedActu = targetSpeed;
+            if(speedActu > 0)
+                speedActu -= deccelSpeed * Time.deltaTime;
+            else
+                speedActu = 0;
         }
     }
 

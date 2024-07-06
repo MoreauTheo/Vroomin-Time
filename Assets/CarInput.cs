@@ -35,6 +35,15 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Accelerating"",
+                    ""type"": ""Value"",
+                    ""id"": ""d2a06e32-7475-40a2-977b-f22343017899"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -70,27 +79,10 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
                     ""action"": ""Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                }
-            ]
-        },
-        {
-            ""name"": ""Car2"",
-            ""id"": ""c3a0043d-9efb-4b90-8ce4-72ebb6c1a2e1"",
-            ""actions"": [
-                {
-                    ""name"": ""Turn"",
-                    ""type"": ""Value"",
-                    ""id"": ""cb395215-88cb-4a4d-8a9f-3d6f8e0a36e3"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
+                },
                 {
                     ""name"": ""1D Axis"",
-                    ""id"": ""7456623f-1612-49ee-99d3-648b24ae8c3d"",
+                    ""id"": ""d39f7663-a4f7-450e-8663-091acbe78d87"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -101,8 +93,8 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""4f2f1bc4-dbd0-44fc-b3fb-d5af1a3348ae"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""id"": ""5bde7845-d5c3-4d25-a970-0353b45100bc"",
+                    ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -112,14 +104,36 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""f8b84645-2e96-4859-a3bb-bdeb0a98100b"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""id"": ""2369de8a-5b60-406e-8e83-d4b9ab8e1788"",
+                    ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""327a330a-cfbc-49ea-900b-71f362a15ae8"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accelerating"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eafc7d7c-20b7-4893-a68b-e20694c13936"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accelerating"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -129,9 +143,7 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
         // Car
         m_Car = asset.FindActionMap("Car", throwIfNotFound: true);
         m_Car_Turn = m_Car.FindAction("Turn", throwIfNotFound: true);
-        // Car2
-        m_Car2 = asset.FindActionMap("Car2", throwIfNotFound: true);
-        m_Car2_Turn = m_Car2.FindAction("Turn", throwIfNotFound: true);
+        m_Car_Accelerating = m_Car.FindAction("Accelerating", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -194,11 +206,13 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Car;
     private List<ICarActions> m_CarActionsCallbackInterfaces = new List<ICarActions>();
     private readonly InputAction m_Car_Turn;
+    private readonly InputAction m_Car_Accelerating;
     public struct CarActions
     {
         private @CarInput m_Wrapper;
         public CarActions(@CarInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Turn => m_Wrapper.m_Car_Turn;
+        public InputAction @Accelerating => m_Wrapper.m_Car_Accelerating;
         public InputActionMap Get() { return m_Wrapper.m_Car; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -211,6 +225,9 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
             @Turn.started += instance.OnTurn;
             @Turn.performed += instance.OnTurn;
             @Turn.canceled += instance.OnTurn;
+            @Accelerating.started += instance.OnAccelerating;
+            @Accelerating.performed += instance.OnAccelerating;
+            @Accelerating.canceled += instance.OnAccelerating;
         }
 
         private void UnregisterCallbacks(ICarActions instance)
@@ -218,6 +235,9 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
             @Turn.started -= instance.OnTurn;
             @Turn.performed -= instance.OnTurn;
             @Turn.canceled -= instance.OnTurn;
+            @Accelerating.started -= instance.OnAccelerating;
+            @Accelerating.performed -= instance.OnAccelerating;
+            @Accelerating.canceled -= instance.OnAccelerating;
         }
 
         public void RemoveCallbacks(ICarActions instance)
@@ -235,58 +255,9 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
         }
     }
     public CarActions @Car => new CarActions(this);
-
-    // Car2
-    private readonly InputActionMap m_Car2;
-    private List<ICar2Actions> m_Car2ActionsCallbackInterfaces = new List<ICar2Actions>();
-    private readonly InputAction m_Car2_Turn;
-    public struct Car2Actions
-    {
-        private @CarInput m_Wrapper;
-        public Car2Actions(@CarInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Turn => m_Wrapper.m_Car2_Turn;
-        public InputActionMap Get() { return m_Wrapper.m_Car2; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(Car2Actions set) { return set.Get(); }
-        public void AddCallbacks(ICar2Actions instance)
-        {
-            if (instance == null || m_Wrapper.m_Car2ActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_Car2ActionsCallbackInterfaces.Add(instance);
-            @Turn.started += instance.OnTurn;
-            @Turn.performed += instance.OnTurn;
-            @Turn.canceled += instance.OnTurn;
-        }
-
-        private void UnregisterCallbacks(ICar2Actions instance)
-        {
-            @Turn.started -= instance.OnTurn;
-            @Turn.performed -= instance.OnTurn;
-            @Turn.canceled -= instance.OnTurn;
-        }
-
-        public void RemoveCallbacks(ICar2Actions instance)
-        {
-            if (m_Wrapper.m_Car2ActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(ICar2Actions instance)
-        {
-            foreach (var item in m_Wrapper.m_Car2ActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_Car2ActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public Car2Actions @Car2 => new Car2Actions(this);
     public interface ICarActions
     {
         void OnTurn(InputAction.CallbackContext context);
-    }
-    public interface ICar2Actions
-    {
-        void OnTurn(InputAction.CallbackContext context);
+        void OnAccelerating(InputAction.CallbackContext context);
     }
 }
