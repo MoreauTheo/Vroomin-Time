@@ -50,6 +50,56 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Car2",
+            "id": "c3a0043d-9efb-4b90-8ce4-72ebb6c1a2e1",
+            "actions": [
+                {
+                    "name": "Turn",
+                    "type": "Value",
+                    "id": "cb395215-88cb-4a4d-8a9f-3d6f8e0a36e3",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "7456623f-1612-49ee-99d3-648b24ae8c3d",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "4f2f1bc4-dbd0-44fc-b3fb-d5af1a3348ae",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "f8b84645-2e96-4859-a3bb-bdeb0a98100b",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
         }
     ],
     "controlSchemes": []
