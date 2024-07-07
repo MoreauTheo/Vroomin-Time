@@ -44,6 +44,15 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""d3871edc-3335-42eb-8c48-ce3ec324b9f2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -134,6 +143,28 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
                     ""action"": ""Accelerating"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a7d6e04-4b73-43cc-a5d4-7c9eb39e44c0"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accelerating"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc025c55-4ca9-4358-9530-9d223188baa0"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -189,6 +220,7 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
         m_Car = asset.FindActionMap("Car", throwIfNotFound: true);
         m_Car_Turn = m_Car.FindAction("Turn", throwIfNotFound: true);
         m_Car_Accelerating = m_Car.FindAction("Accelerating", throwIfNotFound: true);
+        m_Car_Reload = m_Car.FindAction("Reload", throwIfNotFound: true);
         // BeforeRace
         m_BeforeRace = asset.FindActionMap("BeforeRace", throwIfNotFound: true);
         m_BeforeRace_Newaction = m_BeforeRace.FindAction("New action", throwIfNotFound: true);
@@ -257,12 +289,14 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
     private List<ICarActions> m_CarActionsCallbackInterfaces = new List<ICarActions>();
     private readonly InputAction m_Car_Turn;
     private readonly InputAction m_Car_Accelerating;
+    private readonly InputAction m_Car_Reload;
     public struct CarActions
     {
         private @CarInput m_Wrapper;
         public CarActions(@CarInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Turn => m_Wrapper.m_Car_Turn;
         public InputAction @Accelerating => m_Wrapper.m_Car_Accelerating;
+        public InputAction @Reload => m_Wrapper.m_Car_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Car; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -278,6 +312,9 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
             @Accelerating.started += instance.OnAccelerating;
             @Accelerating.performed += instance.OnAccelerating;
             @Accelerating.canceled += instance.OnAccelerating;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
         }
 
         private void UnregisterCallbacks(ICarActions instance)
@@ -288,6 +325,9 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
             @Accelerating.started -= instance.OnAccelerating;
             @Accelerating.performed -= instance.OnAccelerating;
             @Accelerating.canceled -= instance.OnAccelerating;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
         }
 
         public void RemoveCallbacks(ICarActions instance)
@@ -393,6 +433,7 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
     {
         void OnTurn(InputAction.CallbackContext context);
         void OnAccelerating(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
     public interface IBeforeRaceActions
     {

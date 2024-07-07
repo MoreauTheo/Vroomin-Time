@@ -56,7 +56,7 @@ public class MultiplayerManager : MonoBehaviour
 
     }
 
-    void TPBack()
+    public void TPBack()
     {
         for (int i = 0; i < players.Count; i++)
         {

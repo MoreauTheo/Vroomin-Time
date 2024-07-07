@@ -122,4 +122,13 @@ public class CarMovementPhysics : MonoBehaviour
     {
         multiplayerManager.Victory(this.gameObject);
     }
+
+    public void SendVictory(InputAction.CallbackContext ctx)
+    {
+        multiplayerManager.TPBack();
+        speedActu = 0;
+        rb.velocity = Vector3.zero;
+        multiplayerManager.StartRaceM();
+
+    }
 }
