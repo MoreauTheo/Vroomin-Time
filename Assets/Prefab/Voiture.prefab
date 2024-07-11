@@ -660,8 +660,8 @@ Transform:
   m_GameObject: {fileID: 7326527532483379056}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -26.2, y: 0, z: -15.42}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8111474062035563432}
@@ -746,10 +746,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2100162ec008bf47beab004854abc8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 5
   accelSpeed: 10
   deccelSpeed: 10
-  turnSpeed: 200
+  turnSpeed: 150
   driftCatchSpeed: 2.25
   maxDriftAngle: 65
   ChocVFX: {fileID: 6049994839898122673, guid: 1ccf157ebc52be141b66f8c8c1140905, type: 3}
