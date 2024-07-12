@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class TuileManager : MonoBehaviour
@@ -97,6 +98,7 @@ public class TuileManager : MonoBehaviour
                             tuilePose = tileMap[(int)cree.transform.position.x, (int)cree.transform.position.z];
                             //cree.transform.Rotate(0, 90 * rotationAmount, 0);
                             previewTiles.Add(cree);
+                            ChangeOpacity(0.5f, cree);
                             ChangeRender(false, tuilePose);
                         }
 
@@ -138,6 +140,8 @@ public class TuileManager : MonoBehaviour
             Destroy(tileMap[(int)g.transform.position.x, (int)g.transform.position.z]);
             g.GetComponent<Collider>().enabled = true;
             tileMap[(int)g.transform.position.x, (int)g.transform.position.z] = g;
+            ChangeOpacity(1f, g);
+
 
         }
         previewTiles.Clear();
@@ -160,6 +164,27 @@ public class TuileManager : MonoBehaviour
         Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit);
         return hit;
     }
+
+
+
+    public void ChangeOpacity(float opacity,GameObject target)//change l'opacité seulement 
+    {
+        foreach (Material m in target.GetComponent<Renderer>().materials)
+        {
+            m.color = new Vector4(m.color.r, m.color.g, m.color.b, opacity);
+        }
+        
+    }
+    public void ChangeOpacity(float opacity, GameObject target,Vector3 color)//change l'opacité et la color
+    {
+        foreach (Material m in target.GetComponent<Renderer>().materials)
+        {
+            m.color = new Vector4(color.x, color.y, color.z, opacity);
+        }
+
+    }
+
+
 
     public void ChangeRender(bool targetState, GameObject Target)
     {
