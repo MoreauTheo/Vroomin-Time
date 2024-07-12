@@ -605,6 +605,9 @@ MonoBehaviour:
   numberVertical: 9
   blandTile: {fileID: 6631336527932797425, guid: be5aaf87b4e94f74daa7c1594aa44c52, type: 3}
   selected: {fileID: 2991269390915899154, guid: a4d3324052a1dae4eaadb36584a8b9ea, type: 3}
+  selectedTile: {fileID: 0}
+  previewTiles: []
+  rotationAmount: 0
 --- !u!114 &1234957083
 MonoBehaviour:
   m_ObjectHideFlags: 0
