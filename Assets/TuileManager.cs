@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TuileManager : MonoBehaviour
 {
     public int numberHorizontal;
     public int numberVertical;
-    public GameObject[,] tileMap;
+    private GameObject[,] tileMap;
     public GameObject blandTile;
     public GameObject selected;
     public GameObject selectedTile;
     public List<GameObject> previewTiles;
+    public int rotationAmount;
+
     void Start()
     {
         tileMap = new GameObject[numberHorizontal, numberVertical];
@@ -23,6 +24,15 @@ public class TuileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            rotationAmount ++;
+            if (rotationAmount > 3)
+                rotationAmount = 0;
+            ActualizePreview();
+
+        }
         RaycastHit hit = CastRay();
         if (selectedTile) 
         {
@@ -32,10 +42,17 @@ public class TuileManager : MonoBehaviour
                 Debug.Log("reset");
             }
         }
-        Preview();
+        
+            Preview();
+
+        
 
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            ApplyPreview();
 
+        }
 
 
     }
@@ -71,12 +88,19 @@ public class TuileManager : MonoBehaviour
                 {
 
                     foreach(Transform t in selected.transform)
-                    { 
-                        GameObject tuilePose = tileMap[x + (int)t.localPosition.x, y+ (int)t.localPosition.z];
-                        GameObject cree = Instantiate(t.gameObject, tuilePose.transform.position, t.transform.rotation);
-                        previewTiles.Add(cree);
+                    {
+                        if (previewTiles.Count<3)//trouver meilleur condition
+                        {
+                            GameObject tuilePose = tileMap[x + (int)t.localPosition.x, y + (int)t.localPosition.z];
+                            GameObject cree = Instantiate(t.gameObject, tuilePose.transform.position, t.transform.rotation);
+                            cree.transform.RotateAround(hit.collider.transform.position, Vector3.up, 90 * rotationAmount);
+                            tuilePose = tileMap[(int)cree.transform.position.x, (int)cree.transform.position.z];
+                            //cree.transform.Rotate(0, 90 * rotationAmount, 0);
+                            previewTiles.Add(cree);
+                            ChangeRender(false, tuilePose);
+                        }
 
-                        ChangeRender(false, tuilePose);
+
                     }
 
                 }
@@ -104,6 +128,23 @@ public class TuileManager : MonoBehaviour
 
         previewTiles.Clear();
     }
+
+
+
+    void ApplyPreview()
+    {
+        foreach(GameObject g in previewTiles)
+        {
+            Destroy(tileMap[(int)g.transform.position.x, (int)g.transform.position.z]);
+            g.GetComponent<Collider>().enabled = true;
+            tileMap[(int)g.transform.position.x, (int)g.transform.position.z] = g;
+
+        }
+        previewTiles.Clear();
+
+    }
+
+    //tool functions 
 
     private RaycastHit CastRay()//permet de tirer un rayon la ou le joueur clic peut importe la direction de la camera
     {
