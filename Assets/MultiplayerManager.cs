@@ -12,7 +12,7 @@ public class MultiplayerManager : MonoBehaviour
     public float timer;
     public TextMeshProUGUI timerC;
     public TextMeshProUGUI centerText;
-
+    public TuileManager tuileManager;
     void Start()
     {
         
@@ -52,10 +52,16 @@ public class MultiplayerManager : MonoBehaviour
 
         centerText.text = "Le joueur " + players.IndexOf(winner) + " a gagné !";
 
-            Invoke("TPBack", 2f);
-
+        Invoke("StartPick", 2f);
     }
 
+    void StartPick()
+    {
+        centerText.text = "";
+        tuileManager.StartPicking();
+        TPBack();
+
+    }
     public void TPBack()
     {
         for (int i = 0; i < players.Count; i++)
