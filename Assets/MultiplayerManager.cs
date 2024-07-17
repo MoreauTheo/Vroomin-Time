@@ -21,6 +21,16 @@ public class MultiplayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(tuileManager.isPicking)
+        {
+
+          
+            foreach (GameObject car in players)
+            {
+                car.GetComponent<PlayerInput>().SwitchCurrentActionMap("PickTiles");
+            }
+        
+        }
         if(!settingUpPlayer)
         {
             timer += Time.deltaTime;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,14 +21,19 @@ public class CarMovementPhysics : MonoBehaviour
     public float speedLost;
     public CarInput carInput;
     public MultiplayerManager multiplayerManager;
-
+    public float mouseSpeed;
     private Vector3 moveDirection;
     private float buffer;
     private float LRF;
     private float isAccelerating;
     private Rigidbody rb;
 
+    public GameObject cursor;
+    public GameObject selected;
     public float speedActu = 0;
+    public int rotationAmount;
+    public List<GameObject> instantiedTiles;
+
     private void Awake()
     {
         carInput = new CarInput();
@@ -46,6 +52,7 @@ public class CarMovementPhysics : MonoBehaviour
         moveDirection = transform.forward;
         rb = GetComponent<Rigidbody>();
         targetSpeed = speed;
+        cursor.transform.position = new Vector3(12, 25, 3);
     }
 
     // Update is called once per frame
@@ -65,6 +72,31 @@ public class CarMovementPhysics : MonoBehaviour
 
         buffer -= Time.deltaTime;
 
+
+        if(multiplayerManager.tuileManager.isPosing && GetComponent<PlayerInput>().currentActionMap.name != "Vide")
+        {
+            PreviewTilePlayer();
+        }
+
+    }
+
+
+    void PreviewTilePlayer()
+    {
+        
+        RaycastHit hit = CastRay();
+        foreach(GameObject go  in instantiedTiles)
+        {
+            Destroy(go);
+        }
+        instantiedTiles.Clear();
+        foreach (Transform t in selected.transform)
+        {
+
+            GameObject go = Instantiate(t.gameObject, hit.transform.position + t.localPosition, t.rotation);
+            go.transform.RotateAround(hit.collider.transform.position, Vector3.up, 90 * rotationAmount);
+            instantiedTiles.Add(go);
+        }
     }
     public void Turning(float LR)
     {
@@ -123,6 +155,11 @@ public class CarMovementPhysics : MonoBehaviour
         multiplayerManager.Victory(this.gameObject);
     }
 
+    public void MoveCursor(InputAction.CallbackContext ctx)
+    {
+        cursor.transform.position += new Vector3(ctx.ReadValue<Vector2>().x, 0, ctx.ReadValue<Vector2>().y)*Time.deltaTime*mouseSpeed;
+    }
+
     public void SendVictory(InputAction.CallbackContext ctx)
     {
         multiplayerManager.TPBack();
@@ -130,5 +167,49 @@ public class CarMovementPhysics : MonoBehaviour
         rb.velocity = Vector3.zero;
         multiplayerManager.StartRaceM();
 
+    }
+
+    public void RotateSelected()
+    {
+        rotationAmount++;
+        if(rotationAmount >3)
+        {
+            rotationAmount = 0;
+        }
+    }
+
+    public void Select()
+    {
+        RaycastHit hit = CastRay();
+        if (hit.collider.tag != "panel")
+        {
+            selected = hit.collider.transform.parent.gameObject;
+            hit.collider.transform.parent.position = new Vector3(-10, -10, -10);
+            foreach (Transform t in hit.collider.transform.parent)
+            {
+                t.gameObject.GetComponent<Collider>().enabled = false;
+            }
+            GetComponent<PlayerInput>().SwitchCurrentActionMap("Vide");
+            cursor.SetActive(false);
+        }
+    }
+    
+    public void ApllyTile()
+    {
+        RaycastHit hit = CastRay();
+        multiplayerManager.tuileManager.Apply(instantiedTiles,hit.transform.parent);
+        GetComponent<PlayerInput>().SwitchCurrentActionMap("Vide");
+        Destroy(selected);
+        selected = null;
+
+    }
+
+    private RaycastHit CastRay()//permet de tirer un rayon la ou le joueur clic peut importe la direction de la camera
+    {
+       
+        //tir du raycast
+        RaycastHit hit;
+        Physics.Raycast(cursor.transform.position,-Vector3.up*20, out hit);
+        return hit;
     }
 }

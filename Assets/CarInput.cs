@@ -278,6 +278,177 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
             ""id"": ""8c6ecb63-af95-4416-84e4-4be54336738e"",
             ""actions"": [],
             ""bindings"": []
+        },
+        {
+            ""name"": ""PickTiles"",
+            ""id"": ""43999a0b-5c12-470f-9d61-e88a892a60cb"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""e6e24e64-e52d-4285-b72f-bd6a39de923a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ab95301-4789-4fc2-9086-9684c69fd1e2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""079ee07a-7288-4029-88e0-404c47232e29"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": ""NormalizeVector2"",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1a9489d-40e2-4a17-95f3-fc8c13da0b94"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""68cd81a1-015f-4f5c-822e-6ec781b57d7f"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad397afd-1a37-4087-96f7-96f0fc1412a4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PoseTile"",
+            ""id"": ""59f3fc69-d543-4563-bd23-a19cfecafde2"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""b841147d-9567-4968-baec-199878ca568f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""b987de2e-1b8c-4961-b319-1e666c358293"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Button"",
+                    ""id"": ""98837dd3-1346-4faa-82e6-b67f352a3871"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""203b6187-8df9-48b2-9031-49552e090aad"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": ""NormalizeVector2"",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ff46574-49de-46b2-942e-81ddf25ad0bd"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d5429a5b-927e-489b-8bbc-a155ef3f695c"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4ad465b-eb27-4161-9abe-323fbc746b4a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a7ea671-c675-4be3-90df-773c232e9457"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3481372-1228-4795-a295-567367239cce"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -292,6 +463,15 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
         m_BeforeRace_Newaction = m_BeforeRace.FindAction("New action", throwIfNotFound: true);
         // Vide
         m_Vide = asset.FindActionMap("Vide", throwIfNotFound: true);
+        // PickTiles
+        m_PickTiles = asset.FindActionMap("PickTiles", throwIfNotFound: true);
+        m_PickTiles_Move = m_PickTiles.FindAction("Move", throwIfNotFound: true);
+        m_PickTiles_Click = m_PickTiles.FindAction("Click", throwIfNotFound: true);
+        // PoseTile
+        m_PoseTile = asset.FindActionMap("PoseTile", throwIfNotFound: true);
+        m_PoseTile_Move = m_PoseTile.FindAction("Move", throwIfNotFound: true);
+        m_PoseTile_Click = m_PoseTile.FindAction("Click", throwIfNotFound: true);
+        m_PoseTile_Rotate = m_PoseTile.FindAction("Rotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -495,6 +675,122 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
         }
     }
     public VideActions @Vide => new VideActions(this);
+
+    // PickTiles
+    private readonly InputActionMap m_PickTiles;
+    private List<IPickTilesActions> m_PickTilesActionsCallbackInterfaces = new List<IPickTilesActions>();
+    private readonly InputAction m_PickTiles_Move;
+    private readonly InputAction m_PickTiles_Click;
+    public struct PickTilesActions
+    {
+        private @CarInput m_Wrapper;
+        public PickTilesActions(@CarInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_PickTiles_Move;
+        public InputAction @Click => m_Wrapper.m_PickTiles_Click;
+        public InputActionMap Get() { return m_Wrapper.m_PickTiles; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PickTilesActions set) { return set.Get(); }
+        public void AddCallbacks(IPickTilesActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PickTilesActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PickTilesActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Click.started += instance.OnClick;
+            @Click.performed += instance.OnClick;
+            @Click.canceled += instance.OnClick;
+        }
+
+        private void UnregisterCallbacks(IPickTilesActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Click.started -= instance.OnClick;
+            @Click.performed -= instance.OnClick;
+            @Click.canceled -= instance.OnClick;
+        }
+
+        public void RemoveCallbacks(IPickTilesActions instance)
+        {
+            if (m_Wrapper.m_PickTilesActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPickTilesActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PickTilesActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PickTilesActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PickTilesActions @PickTiles => new PickTilesActions(this);
+
+    // PoseTile
+    private readonly InputActionMap m_PoseTile;
+    private List<IPoseTileActions> m_PoseTileActionsCallbackInterfaces = new List<IPoseTileActions>();
+    private readonly InputAction m_PoseTile_Move;
+    private readonly InputAction m_PoseTile_Click;
+    private readonly InputAction m_PoseTile_Rotate;
+    public struct PoseTileActions
+    {
+        private @CarInput m_Wrapper;
+        public PoseTileActions(@CarInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_PoseTile_Move;
+        public InputAction @Click => m_Wrapper.m_PoseTile_Click;
+        public InputAction @Rotate => m_Wrapper.m_PoseTile_Rotate;
+        public InputActionMap Get() { return m_Wrapper.m_PoseTile; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PoseTileActions set) { return set.Get(); }
+        public void AddCallbacks(IPoseTileActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PoseTileActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PoseTileActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Click.started += instance.OnClick;
+            @Click.performed += instance.OnClick;
+            @Click.canceled += instance.OnClick;
+            @Rotate.started += instance.OnRotate;
+            @Rotate.performed += instance.OnRotate;
+            @Rotate.canceled += instance.OnRotate;
+        }
+
+        private void UnregisterCallbacks(IPoseTileActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Click.started -= instance.OnClick;
+            @Click.performed -= instance.OnClick;
+            @Click.canceled -= instance.OnClick;
+            @Rotate.started -= instance.OnRotate;
+            @Rotate.performed -= instance.OnRotate;
+            @Rotate.canceled -= instance.OnRotate;
+        }
+
+        public void RemoveCallbacks(IPoseTileActions instance)
+        {
+            if (m_Wrapper.m_PoseTileActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPoseTileActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PoseTileActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PoseTileActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PoseTileActions @PoseTile => new PoseTileActions(this);
     public interface ICarActions
     {
         void OnTurn(InputAction.CallbackContext context);
@@ -507,5 +803,16 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
     }
     public interface IVideActions
     {
+    }
+    public interface IPickTilesActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnClick(InputAction.CallbackContext context);
+    }
+    public interface IPoseTileActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnClick(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
     }
 }
