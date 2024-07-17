@@ -782,6 +782,7 @@ MonoBehaviour:
   multiplayerManager: {fileID: 3797691}
   everyTile:
   - {fileID: 2991269390915899154, guid: a4d3324052a1dae4eaadb36584a8b9ea, type: 3}
+  - {fileID: 8541650966998554101, guid: 88b310ac458925a479287936df10b474, type: 3}
   spawns:
   - {fileID: 2098531452}
   - {fileID: 621011136}
