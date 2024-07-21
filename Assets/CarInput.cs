@@ -451,7 +451,35 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""ClavierSouris"",
+            ""bindingGroup"": ""ClavierSouris"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Manettes"",
+            ""bindingGroup"": ""Manettes"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Car
         m_Car = asset.FindActionMap("Car", throwIfNotFound: true);
@@ -791,6 +819,24 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
         }
     }
     public PoseTileActions @PoseTile => new PoseTileActions(this);
+    private int m_ClavierSourisSchemeIndex = -1;
+    public InputControlScheme ClavierSourisScheme
+    {
+        get
+        {
+            if (m_ClavierSourisSchemeIndex == -1) m_ClavierSourisSchemeIndex = asset.FindControlSchemeIndex("ClavierSouris");
+            return asset.controlSchemes[m_ClavierSourisSchemeIndex];
+        }
+    }
+    private int m_ManettesSchemeIndex = -1;
+    public InputControlScheme ManettesScheme
+    {
+        get
+        {
+            if (m_ManettesSchemeIndex == -1) m_ManettesSchemeIndex = asset.FindControlSchemeIndex("Manettes");
+            return asset.controlSchemes[m_ManettesSchemeIndex];
+        }
+    }
     public interface ICarActions
     {
         void OnTurn(InputAction.CallbackContext context);
