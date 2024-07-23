@@ -22,15 +22,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Reload",
-                    "type": "Button",
-                    "id": "d3871edc-3335-42eb-8c48-ce3ec324b9f2",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -135,6 +126,17 @@
                 },
                 {
                     "name": "",
+                    "id": "c4b8205e-5731-40eb-96a2-49936de94493",
+                    "path": "<Gamepad>/leftStick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "327a330a-cfbc-49ea-900b-71f362a15ae8",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
@@ -174,39 +176,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Accelerating",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dc025c55-4ca9-4358-9530-9d223188baa0",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reload",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "beb8a1ad-a87d-4ee2-a1bd-e42db8020540",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reload",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "454d3eaa-e2db-4ab2-8e06-a0614f3c6f1b",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

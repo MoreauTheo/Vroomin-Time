@@ -44,15 +44,6 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Reload"",
-                    ""type"": ""Button"",
-                    ""id"": ""d3871edc-3335-42eb-8c48-ce3ec324b9f2"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -157,6 +148,17 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c4b8205e-5731-40eb-96a2-49936de94493"",
+                    ""path"": ""<Gamepad>/leftStick/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""327a330a-cfbc-49ea-900b-71f362a15ae8"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
@@ -196,39 +198,6 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Accelerating"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dc025c55-4ca9-4358-9530-9d223188baa0"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""beb8a1ad-a87d-4ee2-a1bd-e42db8020540"",
-                    ""path"": ""<Gamepad>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""454d3eaa-e2db-4ab2-8e06-a0614f3c6f1b"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -485,7 +454,6 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
         m_Car = asset.FindActionMap("Car", throwIfNotFound: true);
         m_Car_Turn = m_Car.FindAction("Turn", throwIfNotFound: true);
         m_Car_Accelerating = m_Car.FindAction("Accelerating", throwIfNotFound: true);
-        m_Car_Reload = m_Car.FindAction("Reload", throwIfNotFound: true);
         // BeforeRace
         m_BeforeRace = asset.FindActionMap("BeforeRace", throwIfNotFound: true);
         m_BeforeRace_Newaction = m_BeforeRace.FindAction("New action", throwIfNotFound: true);
@@ -563,14 +531,12 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
     private List<ICarActions> m_CarActionsCallbackInterfaces = new List<ICarActions>();
     private readonly InputAction m_Car_Turn;
     private readonly InputAction m_Car_Accelerating;
-    private readonly InputAction m_Car_Reload;
     public struct CarActions
     {
         private @CarInput m_Wrapper;
         public CarActions(@CarInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Turn => m_Wrapper.m_Car_Turn;
         public InputAction @Accelerating => m_Wrapper.m_Car_Accelerating;
-        public InputAction @Reload => m_Wrapper.m_Car_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Car; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -586,9 +552,6 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
             @Accelerating.started += instance.OnAccelerating;
             @Accelerating.performed += instance.OnAccelerating;
             @Accelerating.canceled += instance.OnAccelerating;
-            @Reload.started += instance.OnReload;
-            @Reload.performed += instance.OnReload;
-            @Reload.canceled += instance.OnReload;
         }
 
         private void UnregisterCallbacks(ICarActions instance)
@@ -599,9 +562,6 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
             @Accelerating.started -= instance.OnAccelerating;
             @Accelerating.performed -= instance.OnAccelerating;
             @Accelerating.canceled -= instance.OnAccelerating;
-            @Reload.started -= instance.OnReload;
-            @Reload.performed -= instance.OnReload;
-            @Reload.canceled -= instance.OnReload;
         }
 
         public void RemoveCallbacks(ICarActions instance)
@@ -841,7 +801,6 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
     {
         void OnTurn(InputAction.CallbackContext context);
         void OnAccelerating(InputAction.CallbackContext context);
-        void OnReload(InputAction.CallbackContext context);
     }
     public interface IBeforeRaceActions
     {
