@@ -27,11 +27,16 @@ public class MultiplayerManager : MonoBehaviour
           
             foreach (GameObject car in players)
             {
-                car.GetComponent<PlayerInput>().SwitchCurrentActionMap("PickTiles");
+                if (car.GetComponent<PlayerInput>().currentActionMap.name != "PickTiles")
+                {
+                    Debug.Log(car.GetComponent<PlayerInput>().currentActionMap);
+                    car.GetComponent<PlayerInput>().SwitchCurrentActionMap("PickTiles");
+
+                }
             }
         
         }
-        if(!settingUpPlayer)
+        else if(!tuileManager.isPosing)
         {
             timer += Time.deltaTime;
         }
@@ -60,7 +65,7 @@ public class MultiplayerManager : MonoBehaviour
             car.GetComponent<PlayerInput>().SwitchCurrentActionMap("Vide");
         }
 
-        centerText.text = "Le joueur " + players.IndexOf(winner) + " a gagné !";
+        centerText.text = "Le joueur " + (players.IndexOf(winner)+(int)1) + " a gagné ! \n " + timer;
 
         Invoke("StartPick", 2f);
     }
