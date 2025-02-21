@@ -51,7 +51,7 @@ public class CarMovementPhysics : MonoBehaviour
     // Update is called once per frame
     void Update()    {
         
-        rb.velocity = moveDirection * speedActu;
+        rb.linearVelocity = moveDirection * speedActu;
         Turning(LRF);
 
         moveDirection = Vector3.RotateTowards(moveDirection, transform.forward, driftCatchSpeed * Time.deltaTime, 0.0f);
@@ -127,7 +127,7 @@ public class CarMovementPhysics : MonoBehaviour
     {
         multiplayerManager.TPBack();
         speedActu = 0;
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         multiplayerManager.StartRaceM();
 
     }
