@@ -475,6 +475,8 @@ public partial class @CarInput: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Car.enabled, "This will cause a leak and performance issues, CarInput.Car.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_BeforeRace.enabled, "This will cause a leak and performance issues, CarInput.BeforeRace.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Vide.enabled, "This will cause a leak and performance issues, CarInput.Vide.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_PoseTile.enabled, "This will cause a leak and performance issues, CarInput.PoseTile.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_PickTiles.enabled, "This will cause a leak and performance issues, CarInput.PickTiles.Disable() has not been called.");
     }
 
     public void Dispose()

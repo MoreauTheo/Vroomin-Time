@@ -2010,17 +2010,8 @@ MonoBehaviour:
   isPosing: 0
   panel: {fileID: 839777081}
   multiplayerManager: {fileID: 3797691}
-  everyTile:
-  - {fileID: 2991269390915899154, guid: a4d3324052a1dae4eaadb36584a8b9ea, type: 3}
-  - {fileID: 8541650966998554101, guid: 88b310ac458925a479287936df10b474, type: 3}
-  - {fileID: 6924912605659541449, guid: 4f16e828dbb0ba44cb99682a8dbdf532, type: 3}
-  - {fileID: 840721745150609367, guid: ad2790bdd16f4d549a8d3de9ec46fed6, type: 3}
-  - {fileID: 5303999062330892381, guid: f845fc806850ce14eb977cfaf0e78eb8, type: 3}
-  spawns:
-  - {fileID: 2098531452}
-  - {fileID: 621011136}
-  - {fileID: 820428391}
-  - {fileID: 1978848561}
+  everyTile: []
+  spawns: []
 --- !u!4 &1234957084
 Transform:
   m_ObjectHideFlags: 0
